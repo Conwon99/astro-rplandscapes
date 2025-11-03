@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import GlasgowPage from "@/components/GlasgowPage";
+---
+
+<Layout
+  title="Groundworks & Landscaping Services in Glasgow | RP Build and Landscapes"
+  description="Expert groundworks & landscaping services in Glasgow. Monoblocking, artificial grass, brickwork, fencing, decking & complete groundworks. Free quotes available."
+  keywords="groundworks glasgow, landscaping glasgow, monoblocking glasgow, artificial grass glasgow, brickwork glasgow, fencing contractors glasgow, decking contractors glasgow, outdoor landscaping glasgow, custom groundworks glasgow, professional landscaping glasgow"
+  canonical="https://rpbuildandlandscapes.netlify.app/glasgow"
+  robots="index, follow"
+>
+  <GlasgowPage client:load />
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+  }
+</script>
+

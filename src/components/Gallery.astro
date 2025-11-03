@@ -1,0 +1,222 @@
+---
+import { trackFacebookClick } from "@/utils/analytics";
+
+const galleryImages = [
+  {
+    src: "/gallery/img1.jpg",
+    alt: "Professional groundworks and landscaping project - RP Build and Landscapes"
+  },
+  {
+    src: "/gallery/img2.jpg",
+    alt: "High-quality monoblocking and paving work - Glasgow & Ayrshire"
+  },
+  {
+    src: "/gallery/img3.jpg",
+    alt: "Artificial grass installation and landscaping services"
+  },
+  {
+    src: "/gallery/img4.jpg",
+    alt: "Expert brickwork and masonry construction project"
+  },
+  {
+    src: "/gallery/img5.jpg",
+    alt: "Professional fencing installation and outdoor solutions"
+  },
+  {
+    src: "/gallery/img6.jpg",
+    alt: "Composite decking and outdoor living space design"
+  }
+];
+---
+
+<section id="gallery" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-background">
+  <div class="container mx-auto max-w-7xl">
+    <div class="text-left mb-12 sm:mb-16">
+      <div class="flex items-center mb-4 sm:mb-6">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[hsl(var(--asphalt-grey))] mr-4 sm:mr-6">
+          OUR WORK GALLERY
+        </h2>
+        <div class="flex-1 h-px bg-[hsl(var(--asphalt-grey))]"></div>
+      </div>
+      <p class="text-lg sm:text-xl text-[hsl(var(--asphalt-grey))] max-w-3xl">
+        Take a look at some of our recent groundworks and landscaping projects across Glasgow and Ayrshire
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {galleryImages.map((image, index) => (
+        <div
+          key={index}
+          class="group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          data-gallery-item
+          data-image-index={index}
+        >
+          <div class="relative">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- View More Button -->
+    <div class="text-center mt-8 sm:mt-12">
+      <a
+        href="https://www.facebook.com/rpbuilds/"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-facebook-link="gallery"
+        class="inline-flex items-center gap-2 sm:gap-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl text-sm sm:text-base"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        View more work on Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="gallery-lightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
+  <button
+    id="lightbox-close"
+    class="absolute top-4 right-4 text-white hover:text-primary transition-colors z-10"
+  >
+    <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-prev"
+    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors z-10"
+  >
+    <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-next"
+    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors z-10"
+  >
+    <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <div class="max-w-4xl max-h-full">
+    <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+  </div>
+</div>
+
+<script>
+  import { trackFacebookClick } from '@/utils/analytics';
+  
+  const galleryImages = [
+    {
+      src: "/gallery/img1.jpg",
+      alt: "Professional groundworks and landscaping project - RP Build and Landscapes"
+    },
+    {
+      src: "/gallery/img2.jpg",
+      alt: "High-quality monoblocking and paving work - Glasgow & Ayrshire"
+    },
+    {
+      src: "/gallery/img3.jpg",
+      alt: "Artificial grass installation and landscaping services"
+    },
+    {
+      src: "/gallery/img4.jpg",
+      alt: "Expert brickwork and masonry construction project"
+    },
+    {
+      src: "/gallery/img5.jpg",
+      alt: "Professional fencing installation and outdoor solutions"
+    },
+    {
+      src: "/gallery/img6.jpg",
+      alt: "Composite decking and outdoor living space design"
+    }
+  ];
+  
+  let currentImageIndex = 0;
+  
+  const lightbox = document.getElementById('gallery-lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  
+  const openLightbox = (index) => {
+    currentImageIndex = index;
+    if (lightbox && lightboxImage) {
+      lightboxImage.src = galleryImages[index].src;
+      lightboxImage.alt = galleryImages[index].alt;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  
+  const closeLightbox = () => {
+    if (lightbox) {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  };
+  
+  const nextImage = () => {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    if (lightboxImage) {
+      lightboxImage.src = galleryImages[currentImageIndex].src;
+      lightboxImage.alt = galleryImages[currentImageIndex].alt;
+    }
+  };
+  
+  const prevImage = () => {
+    currentImageIndex = currentImageIndex === 0 ? galleryImages.length - 1 : currentImageIndex - 1;
+    if (lightboxImage) {
+      lightboxImage.src = galleryImages[currentImageIndex].src;
+      lightboxImage.alt = galleryImages[currentImageIndex].alt;
+    }
+  };
+  
+  // Event listeners
+  document.querySelectorAll('[data-gallery-item]').forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
+  });
+  
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', prevImage);
+  if (lightboxNext) lightboxNext.addEventListener('click', nextImage);
+  
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+  });
+  
+  // Close on background click
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+  
+  // Facebook link tracking
+  const facebookLink = document.querySelector('[data-facebook-link]');
+  if (facebookLink) {
+    facebookLink.addEventListener('click', () => {
+      trackFacebookClick('gallery');
+    });
+  }
+</script>
+

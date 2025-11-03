@@ -1,0 +1,174 @@
+---
+import { trackFacebookClick } from "@/utils/analytics";
+
+const currentYear = new Date().getFullYear();
+const handleFacebookClick = () => trackFacebookClick('footer');
+---
+
+<footer class="bg-black text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto max-w-7xl relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <!-- Company Info -->
+      <div class="space-y-6">
+        <div>
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-4">
+            RP Build and Landscapes Limited
+          </h3>
+          <p class="text-white leading-relaxed text-sm sm:text-base">
+            Expert groundworks and landscaping services in Glasgow & Ayrshire. 
+            We specialise in monoblocking, artificial grass, brickwork, fencing, decking, and complete groundworks solutions. 
+            Professional, reliable, and committed to delivering exceptional results for every project.
+          </p>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <a href="tel:+447305967999" class="text-white hover:text-gray-300 transition-colors text-sm sm:text-base">
+              07305 967999
+            </a>
+          </div>
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href="mailto:pope64602@gmail.com" class="text-white hover:text-gray-300 transition-colors text-sm sm:text-base break-all">
+              pope64602@gmail.com
+            </a>
+          </div>
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="text-white text-sm sm:text-base">Glasgow & Ayrshire</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h4 class="font-display text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
+          Our Services
+        </h4>
+        <ul class="space-y-2 sm:space-y-3 text-white">
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Groundworks
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Monoblocking
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Artificial Grass
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Brickwork
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Fencing
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Decking
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Site Preparation
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Service Areas -->
+      <div>
+        <h4 class="font-display text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
+          Service Areas
+        </h4>
+        <ul class="space-y-2 sm:space-y-3 text-white">
+          <li>
+            <a href="#service-areas" class="hover:text-gray-300 transition-colors text-sm sm:text-base">
+              • Glasgow & Ayrshire
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- About Us -->
+      <div>
+        <h4 class="font-display text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
+          About Us
+        </h4>
+        <p class="text-white leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+          RP Build and Landscapes Limited is a trusted provider of groundworks and landscaping services. 
+          Our skilled contractors are experts in all aspects of groundworks, ensuring every project is completed 
+          to the highest standards. We believe in combining functionality with aesthetics to create beautiful, 
+          durable outdoor spaces that enhance your property.
+        </p>
+        
+        <div class="space-y-3">
+          <div class="text-white text-sm sm:text-base">
+            <p class="font-semibold mb-2">Business Hours:</p>
+            <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+            <p>Sat: 9:00 AM - 4:00 PM</p>
+          </div>
+          
+          <div class="flex items-center gap-4">
+            <a 
+              href="https://www.facebook.com/rpbuilds/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-facebook-link="footer"
+              class="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-sm sm:text-base"
+            >
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Follow us on Facebook</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/20 pt-6 sm:pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-white text-sm sm:text-base text-center md:text-left">
+          © {currentYear} RP Build and Landscapes Limited. All rights reserved.
+        </div>
+        <div class="text-white/70 text-xs sm:text-sm text-center">
+          Professional groundworks and landscaping services across Glasgow & Ayrshire.
+          <br />
+          Website made by <a href="https://cdwebdesign.com/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors underline">CD Web Design</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  import { trackFacebookClick } from '@/utils/analytics';
+  
+  // Facebook link tracking
+  const facebookLink = document.querySelector('[data-facebook-link="footer"]');
+  if (facebookLink) {
+    facebookLink.addEventListener('click', () => {
+      trackFacebookClick('footer');
+    });
+  }
+</script>
+
+

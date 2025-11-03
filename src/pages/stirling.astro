@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import StirlingPage from "@/components/StirlingPage";
+---
+
+<Layout
+  title="Groundworks & Landscaping Services in Stirling | RP Build and Landscapes"
+  description="Expert groundworks & landscaping services in Stirling. Monoblocking, artificial grass, brickwork, fencing, decking & complete groundworks. Free quotes available."
+  keywords="groundworks stirling, landscaping stirling, monoblocking stirling, artificial grass stirling, brickwork stirling, fencing contractors stirling, decking contractors stirling, outdoor landscaping stirling, custom groundworks stirling, professional landscaping stirling"
+  canonical="https://rpbuildandlandscapes.netlify.app/stirling"
+  robots="index, follow"
+>
+  <StirlingPage client:load />
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+  }
+</script>
+

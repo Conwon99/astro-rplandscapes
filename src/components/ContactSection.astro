@@ -1,0 +1,287 @@
+---
+import { trackPhoneCallClick, trackWhatsAppClick, trackQuoteRequest, trackFormInteraction } from "@/utils/analytics";
+
+const serviceOptions = [
+  'Groundworks',
+  'Monoblocking',
+  'Artificial Grass',
+  'Brickwork',
+  'Fencing',
+  'Decking',
+  'General Landscaping',
+  'Site Preparation'
+];
+---
+
+<section id="contact-form" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[hsl(var(--muted))]">
+  <div class="container mx-auto max-w-7xl">
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[hsl(var(--asphalt-grey))] mb-4 sm:mb-6">
+        Contact Us
+      </h2>
+      <p class="text-lg sm:text-xl text-[hsl(var(--asphalt-grey))] max-w-3xl mx-auto px-4">
+        Ready to transform your outdoor space? Get in touch for your FREE quote today!
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <!-- Contact Information -->
+      <div class="space-y-6 sm:space-y-8 px-2 sm:px-0">
+        <div>
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-[hsl(var(--asphalt-grey))] mb-4 sm:mb-6">
+            Get In Touch
+          </h3>
+          <p class="text-[hsl(var(--asphalt-grey))] mb-6 sm:mb-8 text-sm sm:text-base">
+            We're here to help with all your groundworks and landscaping needs. Contact us today for a free, no-obligation quote.
+          </p>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="space-y-4 sm:space-y-6">
+          <div class="flex items-start sm:items-center gap-3 sm:gap-4">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[hsl(var(--primary-blue))] rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Phone</p>
+              <a href="tel:+447305967999" class="text-[hsl(var(--primary-blue))] hover:underline text-sm sm:text-base break-all">
+                07305 967999
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start sm:items-center gap-3 sm:gap-4">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[hsl(var(--primary-blue))] rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Email</p>
+              <a href="mailto:pope64602@gmail.com" class="text-[hsl(var(--primary-blue))] hover:underline text-sm sm:text-base break-all">
+                pope64602@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start sm:items-center gap-3 sm:gap-4">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[hsl(var(--primary-blue))] rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Service Areas</p>
+              <p class="text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Glasgow & Ayrshire</p>
+            </div>
+          </div>
+
+          <div class="flex items-start sm:items-center gap-3 sm:gap-4">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[hsl(var(--primary-blue))] rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Business Hours</p>
+              <p class="text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Mon-Fri: 8:00 AM - 6:00 PM</p>
+              <p class="text-[hsl(var(--asphalt-grey))] text-sm sm:text-base">Sat: 9:00 AM - 4:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Contact Buttons -->
+        <div class="pt-4 sm:pt-6">
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button 
+              data-call-button-contact
+              class="flex items-center justify-center gap-2 sm:gap-3 bg-[hsl(var(--primary-blue))] hover:bg-[hsl(var(--primary-blue))]/90 text-white font-semibold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+            >
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              Call Now
+            </button>
+            <button 
+              data-whatsapp-button-contact
+              class="flex items-center justify-center gap-2 sm:gap-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+            >
+              <img 
+                src="/whatsapp.svg" 
+                alt="WhatsApp" 
+                class="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert"
+              />
+              WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+        <h3 class="font-display text-xl sm:text-2xl font-bold text-[hsl(var(--asphalt-grey))] mb-4 sm:mb-6">
+          Request Your FREE Quote
+        </h3>
+        
+        <form id="contact-form-element" class="space-y-4 sm:space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div>
+              <label for="name" class="text-[hsl(var(--asphalt-grey))] font-semibold text-sm sm:text-base block mb-1 sm:mb-2">Name *</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="w-full mt-1 sm:mt-2 rounded-xl border-2 border-gray-300 px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary-blue))]"
+              />
+            </div>
+            <div>
+              <label for="phone" class="text-[hsl(var(--asphalt-grey))] font-semibold text-sm sm:text-base block mb-1 sm:mb-2">Phone *</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                required
+                class="w-full mt-1 sm:mt-2 rounded-xl border-2 border-gray-300 px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary-blue))]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="text-[hsl(var(--asphalt-grey))] font-semibold text-sm sm:text-base block mb-1 sm:mb-2">Email *</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              class="w-full mt-1 sm:mt-2 rounded-xl border-2 border-gray-300 px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary-blue))]"
+            />
+          </div>
+
+          <div>
+            <label for="service" class="text-[hsl(var(--asphalt-grey))] font-semibold text-sm sm:text-base block mb-1 sm:mb-2">Service Required</label>
+            <select
+              id="service"
+              name="service"
+              class="w-full mt-1 sm:mt-2 rounded-xl border-2 border-gray-300 px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary-blue))]"
+            >
+              <option value="">Select a service</option>
+              {serviceOptions.map((service) => (
+                <option value={service}>{service}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="text-[hsl(var(--asphalt-grey))] font-semibold text-sm sm:text-base block mb-1 sm:mb-2">Project Details</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell us about your groundworks and landscaping needs..."
+              class="w-full mt-1 sm:mt-2 rounded-xl border-2 border-gray-300 px-4 py-2 min-h-[100px] sm:min-h-[120px] text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary-blue))]"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-full transition-colors duration-200 text-sm sm:text-base lg:text-lg"
+          >
+            Send Quote Request
+          </button>
+        </form>
+        
+        <!-- Toast notification -->
+        <div id="toast" class="hidden fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50">
+          <p id="toast-message"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { trackPhoneCallClick, trackWhatsAppClick, trackQuoteRequest, trackFormInteraction } from '@/utils/analytics';
+  
+  // Call button
+  const callButton = document.querySelector('[data-call-button-contact]');
+  if (callButton) {
+    callButton.addEventListener('click', () => {
+      trackPhoneCallClick('contact_section');
+      window.location.href = "tel:+447305967999";
+    });
+  }
+  
+  // WhatsApp button
+  const whatsappButton = document.querySelector('[data-whatsapp-button-contact]');
+  if (whatsappButton) {
+    whatsappButton.addEventListener('click', () => {
+      trackWhatsAppClick('contact_section');
+      window.open("https://wa.me/447305967999", "_blank");
+    });
+  }
+  
+  // Form submission
+  const form = document.getElementById('contact-form-element');
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toast-message');
+  
+  const showToast = (message, isError = false) => {
+    if (toast && toastMessage) {
+      toastMessage.textContent = message;
+      toast.classList.remove('hidden');
+      toast.classList.remove(isError ? 'bg-green-600' : 'bg-red-600');
+      toast.classList.add(isError ? 'bg-red-600' : 'bg-green-600');
+      
+      setTimeout(() => {
+        if (toast) toast.classList.add('hidden');
+      }, 3000);
+    }
+  };
+  
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        service: formData.get('service'),
+        message: formData.get('message'),
+        _subject: 'Free Quote Request from Website'
+      };
+      
+      try {
+        const response = await fetch('https://formspree.io/f/xgvndlan', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const serviceArray = data.service ? [data.service.toString()] : [];
+          trackQuoteRequest('contact_form', serviceArray);
+          trackFormInteraction('quote_form', 'submit_success');
+          
+          showToast("Quote request sent! Thank you for your request. We'll respond within 24 hours.", false);
+          
+          // Reset form
+          form.reset();
+        } else {
+          throw new Error('Failed to send message');
+        }
+      } catch (error) {
+        trackFormInteraction('quote_form', 'submit_error');
+        showToast("Error sending request. Please try again or contact us directly.", true);
+      }
+    });
+  }
+</script>
+
+

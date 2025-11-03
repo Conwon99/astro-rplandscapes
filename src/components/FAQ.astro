@@ -1,0 +1,162 @@
+---
+import { trackPhoneCallClick } from "@/utils/analytics";
+
+const faqs = [
+  {
+    question: "What groundworks services do you provide?",
+    answer: "We provide comprehensive groundworks services including site preparation, drainage systems, foundation work, and excavation services. Our groundworks form the foundation for all our landscaping projects, ensuring proper preparation for monoblocking, artificial grass, brickwork, fencing, and decking installations."
+  },
+  {
+    question: "How much does monoblocking cost?",
+    answer: "Monoblocking costs vary depending on the size, design complexity, and material choice. Prices typically range from £40-80 per square meter for standard installations. We provide free, no-obligation quotes for all monoblocking work including driveways, patios, and pathways."
+  },
+  {
+    question: "What areas do you cover?",
+    answer: "We provide groundworks and landscaping services across Glasgow and Ayrshire, including surrounding areas. Contact us to confirm coverage for your specific location and discuss your project requirements."
+  },
+  {
+    question: "Do you install artificial grass?",
+    answer: "Yes, we specialise in high-quality artificial grass installation and maintenance. Our artificial grass solutions offer low maintenance, year-round green appearance, and realistic looks. We handle everything from ground preparation to professional installation with proper drainage systems."
+  },
+  {
+    question: "What brickwork services do you offer?",
+    answer: "We provide expert brickwork and masonry services including walls, retaining walls, repairs, and custom designs. Our skilled bricklayers work with various materials and can create both functional and decorative brickwork solutions for your property."
+  },
+  {
+    question: "Do you offer fencing installation and repairs?",
+    answer: "Yes, we provide comprehensive fencing services including new installations, repairs, and maintenance. We work with various fencing materials and can handle everything from privacy fences to security fencing. All work is completed to the highest standards by our expert contractors."
+  },
+  {
+    question: "Do you install both composite and wooden decking?",
+    answer: "Yes, we specialise in both composite and wooden decking installation. Composite decking offers low maintenance and weather resistance, while wooden decking provides natural beauty and traditional appeal. Our skilled contractors can help you choose the best option for your needs."
+  },
+  {
+    question: "How long does a typical project take?",
+    answer: "Project duration depends on size and complexity. Simple installations like fencing or artificial grass typically take 1-2 days, while larger groundworks or comprehensive landscaping projects may take up to a week. We provide realistic timelines during the quote process and keep you updated throughout the project."
+  },
+  {
+    question: "Do you offer free quotes?",
+    answer: "Yes, we provide completely free, no-obligation quotes for all our services. You can request a quote by calling 07305 967999, emailing us at pope64602@gmail.com, or using our contact form. We'll assess your needs and provide a detailed, transparent quote with no hidden costs."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<section id="faq" class="py-20 px-4 bg-gradient-to-b from-background to-[hsl(var(--muted))]">
+  <div class="container mx-auto max-w-4xl">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-4xl lg:text-5xl font-bold text-[hsl(var(--asphalt-grey))] mb-6">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-xl text-[hsl(var(--asphalt-grey))] max-w-3xl mx-auto">
+        Common questions about our groundworks, landscaping, monoblocking, artificial grass, brickwork, fencing, and decking services across Glasgow and Ayrshire
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <div key={index} class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" data-faq-index={index}>
+          <button
+            class="faq-button w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+          >
+            <h3 class="font-semibold text-lg text-[hsl(var(--asphalt-grey))] pr-4">
+              {faq.question}
+            </h3>
+            <svg class="faq-icon w-5 h-5 text-[hsl(var(--primary-blue))] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          <div class="faq-content hidden px-6 pb-4">
+            <p class="text-[hsl(var(--asphalt-grey))] leading-relaxed">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-lg text-[hsl(var(--asphalt-grey))] mb-6">
+        Still have questions? We're here to help!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:+447305967999"
+          data-phone-call="faq_section"
+          class="inline-flex items-center justify-center px-6 py-3 bg-[hsl(var(--primary-blue))] text-white rounded-full font-semibold hover:bg-[hsl(var(--primary-blue))]/90 transition-colors"
+        >
+          Call 07305 967999
+        </a>
+        <button
+          onclick="document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center justify-center px-6 py-3 border-2 border-[hsl(var(--primary-blue))] text-[hsl(var(--primary-blue))] rounded-full font-semibold hover:bg-[hsl(var(--primary-blue))] hover:text-white transition-colors"
+        >
+          Get Free Quote
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  document.querySelectorAll('.faq-button').forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const content = item?.querySelector('.faq-content');
+      const icon = item?.querySelector('.faq-icon');
+      
+      if (content && icon && item) {
+        const isOpen = !content.classList.contains('hidden');
+        
+        if (isOpen) {
+          content.classList.add('hidden');
+          icon.classList.remove('rotate-180');
+          item.classList.remove('border-primary');
+        } else {
+          // Close all other items
+          document.querySelectorAll('.faq-item').forEach((otherItem) => {
+            if (otherItem !== item) {
+              const otherContent = otherItem.querySelector('.faq-content');
+              const otherIcon = otherItem.querySelector('.faq-icon');
+              if (otherContent && otherIcon) {
+                otherContent.classList.add('hidden');
+                otherIcon.classList.remove('rotate-180');
+                otherItem.classList.remove('border-primary');
+              }
+            }
+          });
+          
+          // Open current item
+          content.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+          item.classList.add('border-primary');
+        }
+      }
+    });
+  });
+  
+  // Phone call tracking
+  import { trackPhoneCallClick } from '@/utils/analytics';
+  const phoneCallLink = document.querySelector('[data-phone-call="faq_section"]');
+  if (phoneCallLink) {
+    phoneCallLink.addEventListener('click', () => {
+      trackPhoneCallClick('faq_section');
+    });
+  }
+</script>
+

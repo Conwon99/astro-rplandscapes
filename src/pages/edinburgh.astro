@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import EdinburghPage from "@/components/EdinburghPage";
+---
+
+<Layout
+  title="Groundworks & Landscaping Services in Edinburgh | RP Build and Landscapes"
+  description="Expert groundworks & landscaping services in Edinburgh. Monoblocking, artificial grass, brickwork, fencing, decking & complete groundworks. Free quotes available."
+  keywords="groundworks edinburgh, landscaping edinburgh, monoblocking edinburgh, artificial grass edinburgh, brickwork edinburgh, fencing contractors edinburgh, decking contractors edinburgh, outdoor landscaping edinburgh, custom groundworks edinburgh, professional landscaping edinburgh"
+  canonical="https://rpbuildandlandscapes.netlify.app/edinburgh"
+  robots="index, follow"
+>
+  <EdinburghPage client:load />
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+  }
+</script>
+

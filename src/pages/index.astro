@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import AboutUs from "@/components/AboutUs";
+import ServicesGrid from "@/components/ServicesGrid";
+import ServiceAreas from "@/components/ServiceAreas";
+import Reviews from "@/components/Reviews";
+import Gallery from "@/components/Gallery";
+import FAQ from "@/components/FAQ";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+---
+
+<Layout robots="index, follow" canonical="https://rpbuildandlandscapes.netlify.app/">
+  <main class="min-h-screen">
+    <Navigation />
+    <Hero />
+    <TrustBar />
+    <AboutUs />
+    <ServicesGrid />
+    <Gallery />
+    <ServiceAreas />
+    <Reviews />
+    <FAQ />
+    <ContactSection />
+    <Footer />
+  </main>
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+  }
+</script>
+

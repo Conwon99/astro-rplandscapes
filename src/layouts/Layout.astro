@@ -1,0 +1,333 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+  image?: string;
+  ogType?: string;
+  robots?: string;
+  structuredData?: object;
+}
+
+const {
+  title = "RP Build and Landscapes | Groundworks & Landscaping Services Glasgow & Ayrshire",
+  description = "Expert groundworks & landscaping services in Glasgow & Ayrshire. Monoblocking, artificial grass, brickwork, fencing, decking & complete groundworks. Free quotes available.",
+  keywords = "groundworks glasgow, landscaping glasgow, monoblocking glasgow, artificial grass glasgow, brickwork glasgow, fencing contractors glasgow, decking contractors glasgow, outdoor landscaping glasgow, custom groundworks glasgow, professional landscaping glasgow, artificial grass installation glasgow, brickwork ayrshire, groundworks contractors ayrshire, landscaping specialists ayrshire, outdoor living glasgow, garden landscaping ayrshire, privacy fencing ayrshire, landscaping builders glasgow, groundworks specialists ayrshire, outdoor landscaping glasgow",
+  canonical = "https://rpbuildandlandscapes.netlify.app/",
+  image = "https://rpbuildandlandscapes.netlify.app/RP - Edited.png",
+  ogType = "website",
+  robots = "index, follow",
+  structuredData,
+} = Astro.props;
+
+const baseUrl = "https://rpbuildandlandscapes.netlify.app";
+const fullCanonical = canonical.startsWith("http") ? canonical : `${baseUrl}${canonical}`;
+const fullImage = image.startsWith("http") ? image : `${baseUrl}${image}`;
+
+// Default structured data (can be overridden per page)
+const defaultStructuredData = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeImprovementContractor", "ContractorService"],
+  "name": "RP Build and Landscapes Limited",
+  "alternateName": "RP Build and Landscapes",
+  "description": "Expert groundworks & landscaping services in Glasgow & Ayrshire. Monoblocking, artificial grass, brickwork, fencing, decking & complete groundworks. Free quotes available.",
+  "url": "https://rpbuildandlandscapes.netlify.app/",
+  "telephone": "+447305967999",
+  "email": "RPBuildandlandscapeslimited@gmail.com",
+  "foundingDate": "2020",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Glasgow",
+    "addressRegion": "Scotland",
+    "addressCountry": "Scotland",
+    "postalCode": "G1"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "55.8642",
+    "longitude": "-4.2518"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Glasgow",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Scotland"
+      }
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Ayrshire",
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "Scotland"
+      }
+    }
+  ],
+  "serviceType": [
+    "Groundworks",
+    "Monoblocking",
+    "Artificial Grass Installation",
+    "Brickwork",
+    "Fencing",
+    "Decking",
+    "Landscaping Services",
+    "Site Preparation"
+  ],
+  "openingHours": [
+    "Mo 08:00-18:00",
+    "Tu 08:00-18:00",
+    "We 08:00-18:00",
+    "Th 08:00-18:00",
+    "Fr 08:00-18:00",
+    "Sa 09:00-16:00",
+    "Su 10:00-15:00"
+  ],
+  "priceRange": "$$",
+  "image": [
+    "https://clydedecking.netlify.app/RP - Edited.png",
+    "https://clydedecking.netlify.app/gallery/deck1.jpg",
+    "https://clydedecking.netlify.app/gallery/deck2.jpg",
+    "https://clydedecking.netlify.app/gallery/Fence1.jpg"
+  ],
+  "logo": "https://clydedecking.netlify.app/RP - Edited.png",
+  "sameAs": [
+    "https://www.facebook.com/people/Clyde-Decking/100095203176792/?_rdr"
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Public Liability Insurance",
+      "description": "Fully insured for all decking and fencing work",
+      "credentialCategory": "insurance",
+      "recognizedBy": {
+        "@type": "Organization",
+        "name": "Insurance Provider"
+      }
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Professional Groundworks & Landscaping Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Groundworks",
+          "description": "Complete groundworks solutions for all your landscaping needs",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "RP Build and Landscapes Limited"
+          }
+        },
+        "priceRange": "£80-120 per square meter"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Monoblocking",
+          "description": "Professional monoblocking and paving services",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "RP Build and Landscapes Limited"
+          }
+        },
+        "priceRange": "£60-100 per square meter"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Artificial Grass",
+          "description": "High-quality artificial grass installation and maintenance",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "RP Build and Landscapes Limited"
+          }
+        },
+        "priceRange": "£40-80 per linear meter"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Brickwork",
+          "description": "Expert brickwork and masonry services",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "RP Build and Landscapes Limited"
+          }
+        },
+        "priceRange": "Quote on request"
+      }
+    ]
+  },
+  "employee": {
+    "@type": "Person",
+    "name": "RP Build and Landscapes Team",
+    "jobTitle": "Groundworks & Landscaping Specialists",
+    "description": "Professional groundworks and landscaping contractors with years of experience"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "15",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Sarah Johnson"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "RP Build and Landscapes were absolutely brilliant! They completed our groundworks and landscaping project and the quality is outstanding. Professional, reliable, and great value for money. Would definitely use again and recommend to anyone needing landscaping work.",
+      "datePublished": "2024-11-15"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Mike Thompson"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Excellent monoblocking installation! The team delivered on time and the workmanship is superb. Great communication throughout. Will definitely use again for future projects.",
+      "datePublished": "2024-11-10"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Lisa Brown"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "The team helped with our artificial grass installation and did an excellent job. Very professional and the quality of work is outstanding. Very reasonable price and highly recommend!",
+      "datePublished": "2024-11-05"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "David Wilson"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Fantastic service! They completed our groundworks and landscaping project and the work is exceptional. Very professional and delivered exactly what we wanted. Will definitely use again for future projects.",
+      "datePublished": "2024-10-28"
+    }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Free Quote",
+      "description": "Complimentary, no-obligation quotes for all groundworks and landscaping projects",
+      "price": "0",
+      "priceCurrency": "GBP"
+    }
+  ],
+  "paymentAccepted": ["Cash", "Bank Transfer", "Cheque"],
+  "currenciesAccepted": "GBP"
+};
+
+const finalStructuredData = structuredData || defaultStructuredData;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="RP Build and Landscapes" />
+    <meta name="robots" content={robots} />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="GB-SCT" />
+    <meta name="geo.placename" content="Glasgow, Scotland" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullCanonical} />
+    
+    <!-- Enhanced JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/RP - Edited.png" />
+    <link rel="alternate icon" href="/RP - Edited.png" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/RP - Edited.png" as="image" type="image/png">
+    <link rel="preload" href="/lovable-uploads/hero.webp" as="image" type="image/webp">
+    <link rel="preload" href="/lovable-uploads/aboutimg.webp" as="image" type="image/webp">
+    
+    <!-- Google Fonts with font-display: swap for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JPKLK381L" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JPKLK381L');
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:image" content={fullImage} />
+    <meta property="og:image:alt" content="RP Build and Landscapes Logo" />
+    <meta property="og:site_name" content="RP Build and Landscapes" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImage} />
+    <meta name="twitter:image:alt" content="RP Build and Landscapes Logo" />
+    
+    <!-- Additional meta tags for better social sharing -->
+    <meta name="theme-color" content="#1e40af" />
+    <meta name="msapplication-TileColor" content="#1e40af" />
+    <meta name="msapplication-TileImage" content="https://rpbuildandlandscapes.netlify.app/RP - Edited.png" />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../index.css';
+</style>
+
+
+

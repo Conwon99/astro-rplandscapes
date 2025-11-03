@@ -1,0 +1,93 @@
+---
+import { trackFacebookClick, trackWhatsAppClick } from "@/utils/analytics";
+
+---
+
+<section id="about" class="py-16 sm:py-20 px-4 bg-[hsl(var(--asphalt-grey))]">
+  <div class="container mx-auto max-w-7xl">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Content -->
+      <div class="space-y-6 sm:space-y-8 order-1 lg:order-1">
+        <div class="space-y-4 sm:space-y-6">
+          <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
+            ABOUT US
+          </h2>
+          <div class="w-16 h-1 bg-primary"></div>
+          
+          <p class="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
+            We are trusted groundworks contractors and landscaping specialists serving Glasgow & Ayrshire. Our professional team specialises in monoblocking, artificial grass installation, brickwork, fencing, decking, and all aspects of groundworks. Expert installation services across Glasgow and Ayrshire, delivering premium outdoor solutions that enhance your property's beauty and value.
+          </p>
+          
+          <!-- Social Media Icons -->
+          <div class="flex items-center gap-4">
+            <a 
+              href="https://www.facebook.com/rpbuilds/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-facebook-link="about_section"
+              class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+            >
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a 
+              href="https://wa.me/447305967999" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-whatsapp-link="about_section"
+              class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center hover:bg-primary/10 transition-colors"
+            >
+              <img 
+                src="/whatsapp.svg" 
+                alt="WhatsApp" 
+                class="w-4 h-4 sm:w-5 sm:h-5"
+                style="filter: brightness(0);"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Logo/Image -->
+      <div class="flex justify-center lg:justify-end order-2 lg:order-2">
+        <div class="text-center max-w-sm w-full">
+          <div class="mb-4 sm:mb-6 mx-auto">
+            <img
+              src="/RP - Edited.png"
+              alt="RP Build and Landscapes logo"
+              class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 object-contain brightness-0 invert mx-auto"
+            />
+          </div>
+          <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mb-2">
+            RP BUILD
+          </h3>
+          <p class="text-white/80 text-base sm:text-lg">
+            AND LANDSCAPES
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { trackFacebookClick, trackWhatsAppClick } from '@/utils/analytics';
+  
+  // Facebook link tracking
+  const facebookLink = document.querySelector('[data-facebook-link="about_section"]');
+  if (facebookLink) {
+    facebookLink.addEventListener('click', () => {
+      trackFacebookClick('about_section');
+    });
+  }
+  
+  // WhatsApp link tracking
+  const whatsappLink = document.querySelector('[data-whatsapp-link="about_section"]');
+  if (whatsappLink) {
+    whatsappLink.addEventListener('click', () => {
+      trackWhatsAppClick('about_section');
+    });
+  }
+</script>
+

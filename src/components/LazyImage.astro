@@ -1,0 +1,90 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  className?: string;
+  fallbackSrc?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { 
+  src, 
+  alt, 
+  className = '', 
+  fallbackSrc,
+  loading = 'lazy'
+} = Astro.props;
+
+const imageId = `lazy-image-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`relative overflow-hidden ${className}`} data-lazy-image={imageId}>
+  <!-- Placeholder/Skeleton -->
+  <div class="lazy-image-placeholder absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+    <div class="w-8 h-8 bg-gray-300 rounded-full animate-pulse"></div>
+  </div>
+  
+  <!-- Actual Image -->
+  <picture class="lazy-image-content opacity-0 transition-opacity duration-300">
+    <!-- WebP source for modern browsers -->
+    <source srcSet={src} type="image/webp" />
+    <!-- Fallback for older browsers -->
+    <img
+      src={fallbackSrc || src.replace('.webp', '.jpg').replace('.webp', '.png')}
+      alt={alt}
+      class={className}
+      loading={loading}
+      data-src={src}
+      data-fallback={fallbackSrc}
+    />
+  </picture>
+</div>
+
+<script define:inline>
+  (function() {
+    const imageId = '{imageId}';
+    const container = document.querySelector(`[data-lazy-image="${imageId}"]`);
+    if (!container) return;
+
+    const img = container.querySelector('img');
+    const placeholder = container.querySelector('.lazy-image-placeholder');
+    const picture = container.querySelector('.lazy-image-content');
+    if (!img || !placeholder || !picture) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (img.complete) {
+            placeholder.style.display = 'none';
+            picture.classList.remove('opacity-0');
+            picture.classList.add('opacity-100');
+          } else {
+            img.onload = () => {
+              placeholder.style.display = 'none';
+              picture.classList.remove('opacity-0');
+              picture.classList.add('opacity-100');
+            };
+            img.onerror = () => {
+              const fallback = img.getAttribute('data-fallback') || img.src.replace('.webp', '.jpg');
+              img.src = fallback;
+              img.onload = () => {
+                placeholder.style.display = 'none';
+                picture.classList.remove('opacity-0');
+                picture.classList.add('opacity-100');
+              };
+            };
+          }
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    );
+
+    observer.observe(container);
+  })();
+</script>
+
+
