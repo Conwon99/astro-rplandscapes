@@ -58,7 +58,7 @@ const Reviews = () => {
           
           {/* Contact button */}
           <button
-            onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => window.location.href = "/contact"}
             className="bg-white border-2 border-black text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
           >
             CONTACT US NOW <ArrowRight className="w-5 h-5" />

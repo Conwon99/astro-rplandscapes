@@ -1,5 +1,5 @@
 ---
-import { trackWhatsAppClick, trackPhoneCallClick } from "@/utils/analytics";
+import { trackQuoteRequest, trackPhoneCallClick } from "@/utils/analytics";
 
 const serviceAreas = [
   "Glasgow",
@@ -92,19 +92,11 @@ const serviceAreas = [
               Call 07305 967999
             </a>
             <a
-              href="https://wa.me/447305967999"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-whatsapp="service_areas"
+              href="/contact"
+              data-message-button="service_areas"
               class="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-colors"
             >
-              <img 
-                src="/whatsapp.svg" 
-                alt="WhatsApp" 
-                class="w-6 h-6"
-                style="filter: brightness(0);"
-              />
-              WhatsApp Us
+              Message us
             </a>
           </div>
         </div>
@@ -124,11 +116,13 @@ const serviceAreas = [
     });
   });
   
-  // WhatsApp tracking
-  document.querySelectorAll('[data-whatsapp]').forEach(link => {
-    link.addEventListener('click', () => {
-      const source = link.getAttribute('data-whatsapp');
-      if (source) trackWhatsAppClick(source);
+  // Message button tracking
+  document.querySelectorAll('[data-message-button]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const source = link.getAttribute('data-message-button');
+      if (source) trackQuoteRequest(source, []);
+      window.location.href = '/contact';
     });
   });
 </script>

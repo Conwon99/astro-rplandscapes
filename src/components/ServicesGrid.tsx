@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { trackQuoteRequest } from "@/utils/analytics";
 
 type ServiceCard = {
   title: string;
@@ -49,7 +50,10 @@ const SERVICE_CARDS: ServiceCard[] = [
 
 const ServicesGrid = () => {
   const handleQuoteClick = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+    console.log('[ServicesGrid] handleQuoteClick called');
+    trackQuoteRequest('services_grid', []);
+    console.log('[ServicesGrid] Navigating to /contact');
+    window.location.href = "/contact";
   };
 
   return (

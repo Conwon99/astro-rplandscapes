@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X, Facebook } from "lucide-react";
-import LazyImage from "@/components/LazyImage";
 import { trackFacebookClick } from "@/utils/analytics";
 
 const Gallery = () => {
@@ -76,10 +75,11 @@ const Gallery = () => {
               onClick={() => openLightbox(index)}
             >
               <div className="relative">
-                <LazyImage
+                <img
                   src={image.src}
                   alt={image.alt}
                   className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
               </div>
@@ -126,10 +126,11 @@ const Gallery = () => {
             </button>
 
             <div className="max-w-4xl max-h-full">
-              <LazyImage
+              <img
                 src={galleryImages[selectedImage].src}
                 alt={galleryImages[selectedImage].alt}
                 className="max-w-full max-h-full object-contain rounded-lg"
+                loading="eager"
               />
             </div>
           </div>

@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import SimpleContactForm from "@/components/SimpleContactForm";
+---
+
+<Layout 
+  title="Contact Us | RP Build and Landscapes | Groundworks & Landscaping Services Glasgow & Ayrshire"
+  description="Contact RP Build and Landscapes for expert groundworks and landscaping services in Glasgow & Ayrshire. Get your free quote today!"
+  canonical="https://rpbuildandlandscapes.netlify.app/contact"
+  robots="index, follow"
+>
+  <main class="min-h-screen">
+    <Navigation client:only="react" />
+    <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[hsl(var(--muted))] min-h-screen flex items-center">
+      <div class="container mx-auto max-w-7xl">
+        <SimpleContactForm client:load />
+      </div>
+    </section>
+    <Footer />
+  </main>
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+  }
+</script>
+

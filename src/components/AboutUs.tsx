@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Award, Users, Clock, Home, Facebook, Truck } from "lucide-react";
-import LazyImage from "@/components/LazyImage";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { trackMessenger, trackFacebookClick, trackWhatsAppClick } from "@/utils/analytics";
 
@@ -49,10 +48,11 @@ const AboutUs = () => {
           <div className="flex justify-center lg:justify-end order-2 lg:order-2">
             <div className="text-center max-w-sm w-full">
               <div className="mb-4 sm:mb-6 mx-auto">
-                <LazyImage
+                <img
                   src="/RP - Edited.png"
                   alt="RP Build and Landscapes logo"
                   className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 object-contain brightness-0 invert mx-auto"
+                  loading="eager"
                 />
               </div>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-2">

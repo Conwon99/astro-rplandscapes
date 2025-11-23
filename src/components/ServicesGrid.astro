@@ -95,15 +95,16 @@ const SERVICE_CARDS: ServiceCard[] = [
             </div>
 
             <div class="mt-6">
-              <button
+              <a
+                href="/contact"
                 data-quote-button
-                class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-semibold rounded-full inline-flex items-center justify-center py-2 px-4 transition-colors"
+                class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-semibold rounded-full inline-flex items-center justify-center py-2 px-4 transition-colors cursor-pointer"
               >
                 Request a Quote
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
         </article>
@@ -113,10 +114,33 @@ const SERVICE_CARDS: ServiceCard[] = [
 </section>
 
 <script>
-  document.querySelectorAll('[data-quote-button]').forEach(button => {
-    button.addEventListener('click', () => {
-      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  import { trackQuoteRequest } from '@/utils/analytics';
+  
+  function initQuoteButtons() {
+    document.querySelectorAll('[data-quote-button]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        // Don't prevent default - let the anchor work naturally
+        // But add analytics tracking
+        try {
+          trackQuoteRequest('services_grid', []);
+        } catch (err) {
+          console.error('[ServicesGrid] Failed to track analytics:', err);
+        }
+      });
     });
-  });
+  }
+  
+  // Initialize when DOM is ready
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initQuoteButtons);
+    } else {
+      initQuoteButtons();
+    }
+    
+    // Fallback: try again after delays
+    setTimeout(initQuoteButtons, 100);
+    setTimeout(initQuoteButtons, 500);
+  }
 </script>
 

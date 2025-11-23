@@ -1,5 +1,5 @@
 ---
-import { trackPhoneCallClick, trackWhatsAppClick, trackQuoteRequest, trackFormInteraction } from "@/utils/analytics";
+import { trackPhoneCallClick, trackQuoteRequest, trackFormInteraction } from "@/utils/analytics";
 
 const serviceOptions = [
   'Groundworks',
@@ -31,7 +31,10 @@ const serviceOptions = [
         <!-- Text Content -->
         <div class="text-left space-y-6 sm:space-y-8">
           <div class="space-y-4 sm:space-y-6">
-            <h1 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg px-2">
+            <h1 class="text-sm sm:text-base text-white/80 font-medium mb-2 px-2 uppercase">
+              Groundworks & Landscaping Services Glasgow & Ayrshire
+            </h1>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg px-2">
               <span class="relative inline-block text-white">
                 Professional
                 <img 
@@ -40,14 +43,14 @@ const serviceOptions = [
                   class="absolute top-1/2 left-0 w-full h-12 sm:h-16 md:h-20 lg:h-24 object-contain -z-10 max-w-full"
                 />
               </span> Groundworks & Landscaping
-            </h1>
-            <h2 class="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white drop-shadow-lg flex items-center gap-3">
+            </h2>
+            <h3 class="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white drop-shadow-lg flex items-center gap-3">
               <svg class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               Glasgow & Ayrshire
-            </h2>
+            </h3>
             
             <p class="text-base sm:text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-md px-2">
               Expert groundworks and landscaping specialists serving Glasgow & Ayrshire. Professional monoblocking, artificial grass installation, brickwork, fencing, decking and complete groundworks services. Trusted builders delivering premium outdoor solutions.
@@ -56,19 +59,21 @@ const serviceOptions = [
 
           <!-- Quick Contact -->
           <div class="pt-4 border-t border-white/20">
-            <p class="text-white text-base sm:text-lg font-semibold mb-4 px-2">Give us a call or a Whatsapp for a <span class="font-bold text-green-400">FREE QUOTE</span></p>
             <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-md sm:max-w-none mx-auto lg:mx-0">
-              <button 
-                data-whatsapp-button
-                class="inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-6 sm:py-8 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base sm:text-lg w-full sm:w-auto"
+              <a 
+                href="/contact"
+                data-quote-button
+                onclick="console.log('Anchor clicked directly'); return true;"
+                class="btn-shiny inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-6 sm:py-8 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base sm:text-lg w-full sm:w-auto relative z-10 cursor-pointer pointer-events-auto"
+                style="pointer-events: auto; z-index: 10; position: relative;"
               >
                 <img 
                   src="/whatsapp.svg" 
                   alt="WhatsApp" 
-                  class="w-6 h-6 sm:w-8 sm:h-8 brightness-0 invert"
+                  class="w-6 h-6 sm:w-8 sm:h-8 brightness-0 invert relative z-10"
                 />
-                WhatsApp
-              </button>
+                <span class="relative z-10">GET A FREE QUOTE</span>
+              </a>
               <button 
                 data-call-button
                 class="inline-flex items-center justify-center sm:justify-start gap-3 sm:gap-4 px-4 sm:px-10 py-6 sm:py-8 bg-transparent hover:bg-transparent text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
@@ -92,24 +97,66 @@ const serviceOptions = [
 </section>
 
 <script>
-  import { trackPhoneCallClick, trackWhatsAppClick } from '@/utils/analytics';
+  import { trackPhoneCallClick, trackQuoteRequest } from '@/utils/analytics';
   
-  // WhatsApp button
-  const whatsappButton = document.querySelector('[data-whatsapp-button]');
-  if (whatsappButton) {
-    whatsappButton.addEventListener('click', () => {
-      trackWhatsAppClick('hero_section');
-      window.open("https://wa.me/447305967999", "_blank");
-    });
+  function initHeroButtons() {
+    console.log('[Hero] Initializing button handlers');
+    
+    // Quote button - enhance the anchor tag with analytics
+    const quoteButton = document.querySelector('[data-quote-button]');
+    console.log('[Hero] Quote button found:', quoteButton);
+    
+    if (quoteButton) {
+      quoteButton.addEventListener('click', function(e) {
+        console.log('[Hero] Quote button clicked!');
+        // Don't prevent default - let the anchor work naturally
+        // But add analytics tracking
+        
+        try {
+          trackQuoteRequest('hero_section', []);
+          console.log('[Hero] Analytics tracked');
+        } catch (err) {
+          console.error('[Hero] Failed to track analytics:', err);
+        }
+      });
+    } else {
+      console.error('[Hero] Quote button not found!');
+    }
+    
+    // Call button
+    const callButton = document.querySelector('[data-call-button]');
+    console.log('[Hero] Call button found:', callButton);
+    
+    if (callButton) {
+      callButton.addEventListener('click', function(e) {
+        console.log('[Hero] Call button clicked!');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        try {
+          trackPhoneCallClick('hero_section');
+        } catch (err) {
+          console.error('[Hero] Failed to track analytics:', err);
+        }
+        
+        window.location.href = "tel:+447305967999";
+      });
+    }
   }
   
-  // Call button
-  const callButton = document.querySelector('[data-call-button]');
-  if (callButton) {
-    callButton.addEventListener('click', () => {
-      trackPhoneCallClick('hero_section');
-      window.location.href = "tel:+447305967999";
-    });
+  // Initialize when DOM is ready
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeroButtons);
+    } else {
+      // DOM is already ready
+      initHeroButtons();
+    }
+    
+    // Fallback: try again after delays
+    setTimeout(initHeroButtons, 100);
+    setTimeout(initHeroButtons, 500);
+    setTimeout(initHeroButtons, 1000);
   }
 </script>
 

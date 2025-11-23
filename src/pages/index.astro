@@ -1,30 +1,30 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import Hero from "@/components/Hero.tsx";
 import TrustBar from "@/components/TrustBar";
 import AboutUs from "@/components/AboutUs";
-import ServicesGrid from "@/components/ServicesGrid";
+import ServicesGrid from "@/components/ServicesGrid.tsx";
 import ServiceAreas from "@/components/ServiceAreas";
 import Reviews from "@/components/Reviews";
 import Gallery from "@/components/Gallery";
 import FAQ from "@/components/FAQ";
-import ContactSection from "@/components/ContactSection";
+import ContactUsSection from "@/components/ContactUsSection";
 import Footer from "@/components/Footer";
 ---
 
 <Layout robots="index, follow" canonical="https://rpbuildandlandscapes.netlify.app/">
   <main class="min-h-screen">
-    <Navigation />
-    <Hero />
+    <Navigation client:only="react" />
+    <Hero client:load />
     <TrustBar />
     <AboutUs />
-    <ServicesGrid />
-    <Gallery />
+    <ServicesGrid client:load />
+    <Gallery client:load />
     <ServiceAreas />
     <Reviews />
     <FAQ />
-    <ContactSection />
+    <ContactUsSection client:load />
     <Footer />
   </main>
 </Layout>
@@ -33,6 +33,23 @@ import Footer from "@/components/Footer";
   import { trackPageView } from '@/utils/analytics';
   if (typeof window !== 'undefined') {
     trackPageView(window.location.pathname, document.title);
+    
+    // Handle hash navigation on page load
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1); // Remove the #
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const navHeight = 64;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = Math.max(0, elementPosition - navHeight);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
+    }
   }
 </script>
 

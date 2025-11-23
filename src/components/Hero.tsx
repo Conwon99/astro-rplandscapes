@@ -6,9 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
-import LazyImage from "@/components/LazyImage";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { trackPhoneCall, trackMessenger, trackQuoteRequest, trackFormInteraction, trackWhatsAppClick, trackPhoneCallClick } from "@/utils/analytics";
+import { trackPhoneCall, trackMessenger, trackQuoteRequest, trackFormInteraction, trackPhoneCallClick } from "@/utils/analytics";
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -85,15 +84,15 @@ const Hero = () => {
   };
 
   const handleMessengerClick = () => {
-    trackWhatsAppClick('hero_section');
-    window.open("https://wa.me/447305967999", "_blank");
+    trackQuoteRequest('hero_section', []);
+    window.location.href = "/contact";
   };
 
   return (
     <section id="hero" className="relative bg-background min-h-screen flex items-center py-20 px-4 pt-32 overflow-hidden w-full">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <LazyImage
+        <img
           src="/fencing1.jpg"
           alt="Professional fencing installation Glasgow - expert fencing contractors"
           className="w-full h-full object-cover"
@@ -108,8 +107,10 @@ const Hero = () => {
           {/* Text Content */}
           <div className="text-left space-y-6 sm:space-y-8">
             <div className="space-y-4 sm:space-y-6">
-              
-              <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg px-2">
+              <h1 className="text-sm sm:text-base text-white/80 font-medium mb-2 px-2 uppercase">
+                Groundworks & Landscaping Services Glasgow & Ayrshire
+              </h1>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg px-2">
                 <span className="relative inline-block text-white">
                   Professional
                   <img 
@@ -118,11 +119,11 @@ const Hero = () => {
                     className="absolute top-1/2 left-0 w-full h-12 sm:h-16 md:h-20 lg:h-24 object-contain -z-10 max-w-full"
                   />
                 </span> Groundworks & Landscaping
-              </h1>
-              <h2 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white drop-shadow-lg flex items-center gap-3">
+              </h2>
+              <h3 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-white drop-shadow-lg flex items-center gap-3">
                 <MapPin className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                 Glasgow & Ayrshire
-              </h2>
+              </h3>
               
               <p className="text-base sm:text-lg text-white/90 font-medium max-w-lg leading-relaxed drop-shadow-md px-2">
                 Expert groundworks and landscaping specialists serving Glasgow & Ayrshire. Professional monoblocking, artificial grass installation, brickwork, fencing, decking and complete groundworks services. Trusted builders delivering premium outdoor solutions.
@@ -133,14 +134,13 @@ const Hero = () => {
 
             {/* Quick Contact */}
             <div className="pt-4 border-t border-white/20">
-              <p className="text-white text-base sm:text-lg font-semibold mb-4 px-2">Give us a call or a Whatsapp for a <span className="font-bold text-green-400">FREE QUOTE</span></p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-md sm:max-w-none mx-auto lg:mx-0">
               <Button 
                 onClick={handleMessengerClick}
-                className="inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-6 sm:py-8 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base sm:text-lg w-full sm:w-auto"
+                className="btn-shiny inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-6 sm:py-8 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base sm:text-lg w-full sm:w-auto relative z-10"
               >
-                <WhatsAppIcon className="w-6 h-6 sm:w-8 sm:h-8" />
-                WhatsApp
+                <WhatsAppIcon className="w-6 h-6 sm:w-8 sm:h-8 relative z-10" />
+                <span className="relative z-10">GET A FREE QUOTE</span>
               </Button>
               <Button 
                 onClick={handleCallClick}
