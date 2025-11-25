@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,12 @@ import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { trackPhoneCall, trackMessenger, trackQuoteRequest, trackFormInteraction, trackPhoneCallClick } from "@/utils/analytics";
 
+// Phone number tracking - canonical for SEO, tracking for users
+const CANONICAL_PHONE_DISPLAY = '07305 967999';
+const CANONICAL_PHONE_HREF = 'tel:+447305967999';
+const TRACKING_PHONE_DISPLAY = '07360 544321';
+const TRACKING_PHONE_HREF = 'tel:+447360544321';
+
 const Hero = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -17,6 +23,10 @@ const Hero = () => {
     message: ''
   });
   const { toast } = useToast();
+  
+  // Phone number state - starts with canonical (for SSR), switches to tracking after mount
+  const [phoneDisplay, setPhoneDisplay] = useState(CANONICAL_PHONE_DISPLAY);
+  const [phoneHref, setPhoneHref] = useState(CANONICAL_PHONE_HREF);
 
   const serviceOptions = [
     'Groundworks',
@@ -28,6 +38,14 @@ const Hero = () => {
     'General Landscaping',
     'Site Preparation'
   ];
+
+  // Switch to tracking number after component mounts (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPhoneDisplay(TRACKING_PHONE_DISPLAY);
+      setPhoneHref(TRACKING_PHONE_HREF);
+    }
+  }, []);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,7 +98,7 @@ const Hero = () => {
 
   const handleCallClick = () => {
     trackPhoneCallClick('hero_section');
-    window.location.href = "tel:+447305967999";
+    window.location.href = phoneHref;
   };
 
   const handleMessengerClick = () => {
@@ -151,7 +169,7 @@ const Hero = () => {
                 </div>
                 <div className="flex flex-col items-center sm:items-start">
                   <span className="text-xs sm:text-sm text-gray-300 font-medium">CALL US NOW</span>
-                  <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">07305 967999</span>
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">{phoneDisplay}</span>
                 </div>
               </Button>
               </div>

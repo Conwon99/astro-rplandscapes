@@ -1,8 +1,27 @@
+import { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, Facebook } from "lucide-react";
 import { trackExternalLink, trackFacebookClick, trackPhoneCallClick } from "@/utils/analytics";
 
+// Phone number tracking - canonical for SEO, tracking for users
+const CANONICAL_PHONE_DISPLAY = '07305 967999';
+const CANONICAL_PHONE_HREF = 'tel:+447305967999';
+const TRACKING_PHONE_DISPLAY = '07360 544321';
+const TRACKING_PHONE_HREF = 'tel:+447360544321';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  
+  // Phone number state - starts with canonical (for SSR), switches to tracking after mount
+  const [phoneDisplay, setPhoneDisplay] = useState(CANONICAL_PHONE_DISPLAY);
+  const [phoneHref, setPhoneHref] = useState(CANONICAL_PHONE_HREF);
+
+  // Switch to tracking number after component mounts (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPhoneDisplay(TRACKING_PHONE_DISPLAY);
+      setPhoneHref(TRACKING_PHONE_HREF);
+    }
+  }, []);
 
   return (
     <footer className="bg-black text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
@@ -25,11 +44,11 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-white flex-shrink-0" />
                 <a 
-                  href="tel:+447305967999" 
+                  href={phoneHref}
                   onClick={() => trackPhoneCallClick('footer')}
                   className="text-white hover:text-gray-300 transition-colors text-sm sm:text-base"
                 >
-                  07305 967999
+                  {phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -96,8 +115,23 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 sm:space-y-3 text-white">
               <li>
-                <a href="#service-areas" className="hover:text-gray-300 transition-colors text-sm sm:text-base">
-                  • Glasgow & Ayrshire
+                <a href="/locations" className="hover:text-gray-300 transition-colors text-sm sm:text-base">
+                  • View All Locations
+                </a>
+              </li>
+              <li>
+                <a href="/locations/glasgow" className="hover:text-gray-300 transition-colors text-sm sm:text-base">
+                  • Glasgow
+                </a>
+              </li>
+              <li>
+                <a href="/locations/ayr" className="hover:text-gray-300 transition-colors text-sm sm:text-base">
+                  • Ayr
+                </a>
+              </li>
+              <li>
+                <a href="/locations/kilmarnock" className="hover:text-gray-300 transition-colors text-sm sm:text-base">
+                  • Kilmarnock
                 </a>
               </li>
             </ul>

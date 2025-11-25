@@ -24,8 +24,10 @@ import SimpleContactForm from "@/components/SimpleContactForm";
 
 <script>
   import { trackPageView } from '@/utils/analytics';
+  import { initPhoneTracking } from '@/utils/phoneTracking';
   if (typeof window !== 'undefined') {
     trackPageView(window.location.pathname, document.title);
+    initPhoneTracking();
   }
 </script>
 

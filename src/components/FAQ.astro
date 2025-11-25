@@ -150,10 +150,12 @@ const faqSchema = {
     });
   });
   
-  // Phone call tracking
+  // Phone call tracking - update href to tracking number
   import { trackPhoneCallClick } from '@/utils/analytics';
+  import { TRACKING_PHONE } from '@/utils/phoneTracking';
   const phoneCallLink = document.querySelector('[data-phone-call="faq_section"]');
   if (phoneCallLink) {
+    phoneCallLink.setAttribute('href', `tel:${TRACKING_PHONE}`);
     phoneCallLink.addEventListener('click', () => {
       trackPhoneCallClick('faq_section');
     });

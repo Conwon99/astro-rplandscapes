@@ -1,0 +1,42 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation';
+import PageHero from '@/components/PageHero';
+import AboutUs from '@/components/AboutUs';
+import ServiceAreas from '@/components/ServiceAreas';
+import CTA from '@/components/CTA';
+import Footer from '@/components/Footer';
+
+const title = "About Us | RP Build and Landscapes - Glasgow & Ayrshire";
+const description = "Learn about RP Build and Landscapes, expert groundworks and landscaping specialists serving Glasgow & Ayrshire. Quality workmanship, reliable service, and customer satisfaction.";
+const canonical = "https://rpbuildandlandscapes.netlify.app/about";
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <main class="min-h-screen">
+    <Navigation client:only="react" />
+    <PageHero 
+      client:load 
+      backgroundImage="/Hero/heroj.jpg"
+      title="About RP Build and Landscapes"
+      description="Expert groundworks and landscaping specialists delivering quality workmanship and reliable service across Glasgow & Ayrshire. Trusted for professional results, honest pricing, and exceptional customer service."
+      showContactButtons={false}
+    />
+    <AboutUs client:load />
+    <ServiceAreas client:load />
+    <CTA client:load />
+    <Footer client:load />
+  </main>
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  import { initPhoneTracking } from '@/utils/phoneTracking';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+    initPhoneTracking();
+  }
+</script>
+
+
+

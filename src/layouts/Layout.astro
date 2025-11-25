@@ -87,14 +87,14 @@ const defaultStructuredData = {
   ],
   "priceRange": "$$",
   "image": [
-    "https://clydedecking.netlify.app/RP - Edited.png",
-    "https://clydedecking.netlify.app/gallery/deck1.jpg",
-    "https://clydedecking.netlify.app/gallery/deck2.jpg",
-    "https://clydedecking.netlify.app/gallery/Fence1.jpg"
+    "https://rpbuildandlandscapes.netlify.app/RP - Edited.png",
+    "https://rpbuildandlandscapes.netlify.app/gallery/img1.jpg",
+    "https://rpbuildandlandscapes.netlify.app/gallery/img2.jpg",
+    "https://rpbuildandlandscapes.netlify.app/gallery/img3.jpg"
   ],
-  "logo": "https://clydedecking.netlify.app/RP - Edited.png",
+  "logo": "https://rpbuildandlandscapes.netlify.app/RP - Edited.png",
   "sameAs": [
-    "https://www.facebook.com/people/Clyde-Decking/100095203176792/?_rdr"
+    "https://www.facebook.com/rpbuilds/"
   ],
   "hasCredential": [
     {
@@ -322,6 +322,104 @@ const finalStructuredData = structuredData || defaultStructuredData;
 
   <body>
     <slot />
+    <script is:inline>
+      // Phone number tracking - replaces visible numbers with tracking number
+      // Original: +447305967999 (for Google/SEO)
+      // Tracking: +447360544321 (for users)
+      (function() {
+        const ORIGINAL_PHONE = '+447305967999';
+        const TRACKING_PHONE = '+447360544321';
+        const ORIGINAL_DISPLAY = '07305 967999';
+        const TRACKING_DISPLAY = '07360 544321';
+        
+        function replacePhoneNumbers() {
+          // Replace text content
+          const walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT,
+            {
+              acceptNode: function(node) {
+                var parent = node.parentElement;
+                if (!parent) return NodeFilter.FILTER_REJECT;
+                var tagName = parent.tagName ? parent.tagName.toLowerCase() : '';
+                if (tagName === 'script' || tagName === 'style' || tagName === 'noscript') {
+                  return NodeFilter.FILTER_REJECT;
+                }
+                return NodeFilter.FILTER_ACCEPT;
+              }
+            }
+          );
+          
+          var textNodes = [];
+          var node;
+          while (node = walker.nextNode()) {
+            if (node.nodeType === Node.TEXT_NODE) {
+              textNodes.push(node);
+            }
+          }
+          
+          textNodes.forEach(function(textNode) {
+            var text = textNode.textContent || '';
+            var patterns = ['07305 967999', '07305967999', '+44 7305 967999', '+447305967999'];
+            var replaced = false;
+            
+            patterns.forEach(function(pattern) {
+              if (text.indexOf(pattern) !== -1) {
+                text = text.replace(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), TRACKING_DISPLAY);
+                replaced = true;
+              }
+            });
+            
+            if (replaced) {
+              textNode.textContent = text;
+            }
+          });
+          
+          // Update tel: links
+          var phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+          phoneLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href && (href.indexOf(ORIGINAL_PHONE) !== -1 || href.indexOf('+447305967999') !== -1)) {
+              link.setAttribute('href', 'tel:' + TRACKING_PHONE);
+            }
+          });
+        }
+        
+        function initPhoneTracking() {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', replacePhoneNumbers);
+          } else {
+            replacePhoneNumbers();
+          }
+          
+          // Run multiple times to catch React components
+          setTimeout(replacePhoneNumbers, 100);
+          setTimeout(replacePhoneNumbers, 500);
+          setTimeout(replacePhoneNumbers, 1000);
+          setTimeout(replacePhoneNumbers, 2000);
+          setTimeout(replacePhoneNumbers, 3000);
+          
+          // Watch for dynamic content
+          if (typeof MutationObserver !== 'undefined') {
+            var observer = new MutationObserver(function() {
+              replacePhoneNumbers();
+            });
+            
+            observer.observe(document.body, {
+              childList: true,
+              subtree: true,
+              characterData: true
+            });
+            
+            setTimeout(function() {
+              observer.disconnect();
+            }, 30000);
+          }
+        }
+        
+        initPhoneTracking();
+      })();
+    </script>
   </body>
 </html>
 

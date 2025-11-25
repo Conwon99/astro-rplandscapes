@@ -106,10 +106,12 @@ const serviceAreas = [
 </section>
 
 <script>
-  import { trackPhoneCallClick, trackWhatsAppClick } from '@/utils/analytics';
+  import { trackPhoneCallClick, trackWhatsAppClick, trackQuoteRequest } from '@/utils/analytics';
+  import { TRACKING_PHONE } from '@/utils/phoneTracking';
   
-  // Phone call tracking
+  // Phone call tracking - update href to tracking number
   document.querySelectorAll('[data-phone-call]').forEach(link => {
+    link.setAttribute('href', `tel:${TRACKING_PHONE}`);
     link.addEventListener('click', () => {
       const source = link.getAttribute('data-phone-call');
       if (source) trackPhoneCallClick(source);

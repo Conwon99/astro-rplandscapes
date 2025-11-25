@@ -3,11 +3,20 @@ import { Menu, X, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 import { trackPhoneCall, trackNavigation, trackQuoteRequest, trackPhoneCallClick } from "@/utils/analytics";
 
+// Phone number tracking - canonical for SEO, tracking for users
+const CANONICAL_PHONE_DISPLAY = '07305 967999';
+const CANONICAL_PHONE_HREF = 'tel:+447305967999';
+const TRACKING_PHONE_DISPLAY = '07360 544321';
+const TRACKING_PHONE_HREF = 'tel:+447360544321';
+
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
   const [isHydrated, setIsHydrated] = useState(false);
+  
+  // Phone number state - starts with canonical (for SSR), switches to tracking after mount
+  const [phoneDisplay, setPhoneDisplay] = useState(CANONICAL_PHONE_DISPLAY);
+  const [phoneHref, setPhoneHref] = useState(CANONICAL_PHONE_HREF);
 
   useEffect(() => {
     console.log('[Navigation] Component mounted');
@@ -16,6 +25,12 @@ const Navigation = () => {
     console.log('[Navigation] Checking if buttons are in DOM...');
     const buttons = document.querySelectorAll('nav button');
     console.log('[Navigation] Navigation buttons found:', buttons.length);
+    
+    // Switch to tracking number after component mounts (client-side only)
+    if (typeof window !== 'undefined') {
+      setPhoneDisplay(TRACKING_PHONE_DISPLAY);
+      setPhoneHref(TRACKING_PHONE_HREF);
+    }
     
     return () => {
       console.log('[Navigation] Component unmounted');
@@ -40,7 +55,7 @@ const Navigation = () => {
 
   const handleCallClick = () => {
     trackPhoneCallClick('navigation');
-    window.location.href = "tel:+447305967999";
+    window.location.href = phoneHref;
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -118,12 +133,24 @@ const Navigation = () => {
   };
 
 
+  const handleServicesClick = () => {
+    trackNavigation('services_page');
+    window.location.href = "/services";
+    setIsMenuOpen(false);
+  };
+
+  const handleAboutClick = () => {
+    trackNavigation('about_page');
+    window.location.href = "/about";
+    setIsMenuOpen(false);
+  };
+
   const navItems = [
     { label: "HOME", onClick: () => scrollToSection("hero") },
-    { label: "SERVICES", onClick: () => scrollToSection("services") },
+    { label: "SERVICES", onClick: handleServicesClick },
+    { label: "ABOUT", onClick: handleAboutClick },
     { label: "GALLERY", onClick: () => scrollToSection("gallery") },
     { label: "REVIEWS", onClick: () => scrollToSection("reviews") },
-    { label: "FAQ", onClick: () => scrollToSection("faq") },
     { label: "CONTACT", onClick: handleContactClick },
   ];
 
@@ -193,7 +220,7 @@ const Navigation = () => {
               </div>
               <div className="flex flex-col items-start">
                 <span className="text-xs text-gray-300 font-medium">CALL US NOW</span>
-                <span className="text-lg font-bold text-white">07305 967999</span>
+                <span className="text-lg font-bold text-white">{phoneDisplay}</span>
               </div>
             </Button>
             <button
@@ -220,7 +247,7 @@ const Navigation = () => {
               </div>
               <div className="flex flex-col items-start">
                 <span className="text-xs text-gray-300 font-medium">CALL US NOW</span>
-                <span className="text-3xl font-bold text-white">07305 967999</span>
+                <span className="text-3xl font-bold text-white">{phoneDisplay}</span>
               </div>
             </Button>
             <Button
@@ -279,7 +306,7 @@ const Navigation = () => {
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-xs text-gray-300 font-medium">CALL US NOW</span>
-                    <span className="text-3xl font-bold text-white">07305 967999</span>
+                    <span className="text-3xl font-bold text-white">{phoneDisplay}</span>
                   </div>
                 </Button>
                 <Button

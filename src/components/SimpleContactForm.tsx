@@ -27,6 +27,7 @@ const SimpleContactForm = () => {
           name: formData.name,
           phone: formData.phone,
           message: formData.message,
+          website_url: typeof window !== 'undefined' ? window.location.href : '',
           _subject: 'Contact Form Submission from Website'
         }),
       });

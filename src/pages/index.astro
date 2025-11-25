@@ -31,8 +31,12 @@ import Footer from "@/components/Footer";
 
 <script>
   import { trackPageView } from '@/utils/analytics';
+  import { initPhoneTracking } from '@/utils/phoneTracking';
   if (typeof window !== 'undefined') {
     trackPageView(window.location.pathname, document.title);
+    
+    // Initialize phone number tracking (replaces visible numbers with tracking number)
+    initPhoneTracking();
     
     // Handle hash navigation on page load
     if (window.location.hash) {

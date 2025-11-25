@@ -1,5 +1,12 @@
+import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 import { trackPhoneCall, trackMessenger, trackPhoneCallClick, trackQuoteRequest } from "@/utils/analytics";
+
+// Phone number tracking - canonical for SEO, tracking for users
+const CANONICAL_PHONE_DISPLAY = '07305 967999';
+const CANONICAL_PHONE_HREF = 'tel:+447305967999';
+const TRACKING_PHONE_DISPLAY = '07360 544321';
+const TRACKING_PHONE_HREF = 'tel:+447360544321';
 
 const ServiceAreas = () => {
   const serviceAreas = [
@@ -13,6 +20,18 @@ const ServiceAreas = () => {
     "Saltcoats",
     "Largs"
   ];
+  
+  // Phone number state - starts with canonical (for SSR), switches to tracking after mount
+  const [phoneDisplay, setPhoneDisplay] = useState(CANONICAL_PHONE_DISPLAY);
+  const [phoneHref, setPhoneHref] = useState(CANONICAL_PHONE_HREF);
+
+  // Switch to tracking number after component mounts (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPhoneDisplay(TRACKING_PHONE_DISPLAY);
+      setPhoneHref(TRACKING_PHONE_HREF);
+    }
+  }, []);
 
   return (
     <section id="service-areas" className="py-20 px-4 bg-gradient-to-b from-background to-[hsl(var(--muted))]">
@@ -84,11 +103,11 @@ const ServiceAreas = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="tel:+447305967999"
+                  href={phoneHref}
                   onClick={() => trackPhoneCallClick('service_areas')}
                   className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Call 07305 967999
+                  Call {phoneDisplay}
                 </a>
                 <a
                   href="/contact"

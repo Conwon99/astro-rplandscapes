@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation';
+import PageHero from '../../components/PageHero';
+import LocationDetail from '../../components/LocationDetail';
+import Footer from '../../components/Footer';
+import { getLocationBySlug } from '../../utils/locationData';
+
+const location = getLocationBySlug('ardrossan');
+const title = location ? `Groundworks & Landscaping Services in ${location.name} | RP Build and Landscapes` : "Groundworks & Landscaping Services in Ardrossan | RP Build and Landscapes";
+const description = location ? location.description : "Professional groundworks and landscaping services in Ardrossan. Expert monoblocking, artificial grass, brickwork, fencing, and decking.";
+const canonical = location ? `https://rpbuildandlandscapes.netlify.app/locations/${location.slug}` : "https://rpbuildandlandscapes.netlify.app/locations/ardrossan";
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <main class="min-h-screen">
+    <Navigation client:only="react" />
+    {location && (
+      <>
+        <PageHero 
+          client:load 
+          backgroundImage="/Hero/heroj.jpg"
+          title={`Professional Groundworks & Landscaping Services in ${location.name}`}
+          description={location.description}
+          showContactButtons={false}
+        />
+        <div class="pt-16">
+          <LocationDetail client:load location={location} />
+          <Footer client:load />
+        </div>
+      </>
+    )}
+  </main>
+</Layout>
+
+<script>
+  import { trackPageView } from '@/utils/analytics';
+  import { initPhoneTracking } from '@/utils/phoneTracking';
+  if (typeof window !== 'undefined') {
+    trackPageView(window.location.pathname, document.title);
+    initPhoneTracking();
+  }
+</script>
+
+
+

@@ -2,8 +2,18 @@ import { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { trackPhoneCall, trackPhoneCallClick, trackQuoteRequest } from "@/utils/analytics";
 
+// Phone number tracking - canonical for SEO, tracking for users
+const CANONICAL_PHONE_DISPLAY = '07305 967999';
+const CANONICAL_PHONE_HREF = 'tel:+447305967999';
+const TRACKING_PHONE_DISPLAY = '07360 544321';
+const TRACKING_PHONE_HREF = 'tel:+447360544321';
+
 const FAQ = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
+  
+  // Phone number state - starts with canonical (for SSR), switches to tracking after mount
+  const [phoneDisplay, setPhoneDisplay] = useState(CANONICAL_PHONE_DISPLAY);
+  const [phoneHref, setPhoneHref] = useState(CANONICAL_PHONE_HREF);
 
   const toggleItem = (index: number) => {
     setOpenItems(prev => 
@@ -64,6 +74,14 @@ const FAQ = () => {
       }
     }))
   };
+
+  // Switch to tracking number after component mounts (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPhoneDisplay(TRACKING_PHONE_DISPLAY);
+      setPhoneHref(TRACKING_PHONE_HREF);
+    }
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -135,11 +153,11 @@ const FAQ = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+447305967999"
+                href={phoneHref}
                 onClick={() => trackPhoneCallClick('faq_section')}
                 className="inline-flex items-center justify-center px-6 py-3 bg-[hsl(var(--primary-blue))] text-white rounded-full font-semibold hover:bg-[hsl(var(--primary-blue))]/90 transition-colors"
               >
-                Call 07305 967999
+                Call {phoneDisplay}
               </a>
               <button
                 onClick={() => {
